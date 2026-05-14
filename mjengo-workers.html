@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mjengo Workers — Maxwell Changilwa | Kabiro Ward</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <style>
+    .mjengo-hero {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .mjengo-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1800&q=80') center/cover no-repeat;
+    }
+    .mjengo-hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10,30,10,0.96) 0%, rgba(10,30,10,0.75) 50%, rgba(0,0,0,0.5) 100%);
+    }
+    .mjengo-hero-content { position: relative; z-index: 2; padding: 140px 0 80px; }
+    .mjengo-slogan {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      font-weight: 900;
+      color: var(--white);
+      max-width: 700px;
+      line-height: 1.1;
+      margin: 24px 0;
+    }
+    .mjengo-slogan em { color: var(--gold); font-style: normal; display: block; }
+    .advocacy-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .advocacy-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--gold), var(--gold-dark));
+    }
+    .advocacy-card:hover {
+      transform: translateX(6px);
+      border-color: rgba(201,162,39,0.35);
+    }
+    .advocacy-icon { font-size: 2.2rem; margin-bottom: 14px; }
+    .advocacy-title { font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; color: var(--white); margin-bottom: 10px; }
+    .testimonial-band {
+      background: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1800&q=80') center/cover fixed;
+      position: relative;
+    }
+    .testimonial-band::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(5,15,5,0.9);
+    }
+    .testimonial-band-content { position: relative; z-index: 2; padding: 80px 0; }
+    .sacco-card {
+      background: linear-gradient(135deg, rgba(10,79,42,0.3), rgba(5,41,24,0.5));
+      border: 1px solid rgba(201,162,39,0.3);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      text-align: center;
+    }
+    .sacco-icon { font-size: 3rem; margin-bottom: 16px; }
+    .sacco-title { font-family: var(--font-heading); font-weight: 800; font-size: 1.2rem; color: var(--gold); margin-bottom: 12px; }
+    .bold-quote {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--white);
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.3;
+    }
+    .bold-quote span { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar" data-transparent="true">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="nav-logo-badge">MC</div><div class="nav-logo-text"><span class="nav-logo-name">Maxwell Changilwa</span><span class="nav-logo-sub">MCA Aspirant · Kabiro Ward</span></div></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="manifesto.html">Manifesto</a>
+      <a href="mjengo-workers.html" class="active">Mjengo</a><a href="projects.html">Projects</a>
+      <a href="gallery.html">Gallery</a><a href="news.html">News</a><a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="volunteer.html" class="btn btn-outline btn-sm">Volunteer</a>
+      <a href="donate.html" class="btn btn-primary btn-sm">Support Campaign</a>
+    </div>
+    <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="manifesto.html">Manifesto</a>
+  <a href="mjengo-workers.html">Mjengo Workers</a><a href="projects.html">Projects</a>
+  <a href="gallery.html">Gallery</a><a href="news.html">News</a><a href="contact.html">Contact</a>
+  <div class="mobile-menu-cta"><a href="volunteer.html" class="btn btn-outline">Volunteer</a><a href="donate.html" class="btn btn-primary">Support Campaign</a></div>
+</div>
+
+<!-- Hero -->
+<section class="mjengo-hero">
+  <div class="mjengo-hero-bg"></div>
+  <div class="container mjengo-hero-content">
+    <div class="section-label">Workers Advocacy</div>
+    <h1 class="mjengo-slogan">
+      Every Worker Deserves
+      <em>Respect & Fair Pay</em>
+    </h1>
+    <p style="max-width:580px; color:rgba(255,255,255,0.75); font-size:1.05rem; line-height:1.9; margin-bottom:36px;">
+      The construction workers of Nairobi build the skylines we admire — yet they remain among the most exploited, unprotected, and forgotten workers in Kenya. Maxwell Changilwa says: Not on our watch.
+    </p>
+    <div style="display:flex; gap:16px; flex-wrap:wrap;">
+      <a href="volunteer.html" class="btn btn-primary btn-lg">🤝 Join the Fight</a>
+      <a href="contact.html" class="btn btn-outline btn-lg">📞 Register Your Concern</a>
+    </div>
+  </div>
+</section>
+
+<!-- The Reality -->
+<section class="section-pad bg-dark">
+  <div class="container">
+    <div class="section-title-block centered reveal">
+      <div class="section-label">The Reality</div>
+      <h2 class="section-title">What Mjengo Workers <span>Face Every Day</span></h2>
+      <div class="gold-divider centered"></div>
+      <p class="section-subtitle">Kabiro's construction workers power Nairobi's growth — but they go home with broken bodies, stolen wages, and no safety nets.</p>
+    </div>
+    <div class="grid-3">
+      <div class="advocacy-card reveal">
+        <div class="advocacy-icon">💰</div>
+        <div class="advocacy-title">Wage Theft & Exploitation</div>
+        <p style="font-size:0.9rem;">Contractors routinely withhold or reduce agreed pay. Workers have no written contracts, making legal recourse nearly impossible.</p>
+      </div>
+      <div class="advocacy-card reveal">
+        <div class="advocacy-icon">⛑️</div>
+        <div class="advocacy-title">No Safety Equipment</div>
+        <p style="font-size:0.9rem;">Most mjengo sites lack helmets, harnesses, and first aid. Falls and injuries are common — and workers foot the medical bills themselves.</p>
+      </div>
+      <div class="advocacy-card reveal">
+        <div class="advocacy-icon">🏥</div>
+        <div class="advocacy-title">No Healthcare Access</div>
+        <p style="font-size:0.9rem;">The majority of construction workers are uninsured — no NHIF, no NSSF. A single accident can plunge an entire family into poverty.</p>
+      </div>
+      <div class="advocacy-card reveal">
+        <div class="advocacy-icon">📄</div>
+        <div class="advocacy-title">No Formal Contracts</div>
+        <p style="font-size:0.9rem;">Workers are hired verbally, worked casually, and dismissed without notice or compensation — leaving them legally unprotected.</p>
+      </div>
+      <div class="advocacy-card reveal">
+        <div class="advocacy-icon">🕐</div>
+        <div class="advocacy-title">Excessive Working Hours</div>
+        <p style="font-size:0.9rem;">12–16 hour shifts are common with no overtime pay. Workers endure these conditions fearing dismissal if they raise concerns.</p>
+      </div>
+      <div class="advocacy-card reveal">
+        <div class="advocacy-icon">🏚️</div>
+        <div class="advocacy-title">Housing Insecurity</div>
+        <p style="font-size:0.9rem;">After working on luxury developments, many mjengo workers return to cramped, substandard housing with no access to basic amenities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section style="background:linear-gradient(135deg,var(--green-dark),var(--charcoal-mid)); padding:64px 0; border-top:1px solid rgba(201,162,39,0.15); border-bottom:1px solid rgba(201,162,39,0.15);">
+  <div class="container">
+    <div class="stats-grid reveal">
+      <div class="stat-block"><div class="stat-number" data-count="500000" data-suffix="+">0+</div><div class="stat-label">Mjengo Workers in Nairobi</div></div>
+      <div class="stat-block"><div class="stat-number" data-count="80" data-suffix="%">0%</div><div class="stat-label">Without Written Contracts</div></div>
+      <div class="stat-block"><div class="stat-number" data-count="90" data-suffix="%">0%</div><div class="stat-label">Without Health Insurance</div></div>
+      <div class="stat-block"><div class="stat-number" data-count="60" data-suffix="%">0%</div><div class="stat-label">Earning Below Minimum Wage</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Our Plan -->
+<section class="section-pad bg-darker">
+  <div class="container">
+    <div class="grid-2" style="gap:64px; align-items:start;">
+      <div class="reveal from-left">
+        <div class="section-label">Maxwell's Plan</div>
+        <h2 class="section-title">Fighting For <span>Worker Justice</span></h2>
+        <div class="gold-divider"></div>
+        <p style="margin-bottom:32px;">Maxwell Changilwa has spent years advocating for Kabiro's construction workers. As MCA, he will use every available legal and civic channel to protect and uplift them.</p>
+        <div class="point-list">
+          <div class="point-item"><span class="point-check">✅</span><span class="point-text"><strong>Fair Wage Advocacy:</strong> Push for county-level minimum wage enforcement for all construction workers in Nairobi</span></div>
+          <div class="point-item"><span class="point-check">✅</span><span class="point-text"><strong>Contract Enforcement:</strong> Lobby for mandatory written contracts for all casual and permanent mjengo workers</span></div>
+          <div class="point-item"><span class="point-check">✅</span><span class="point-text"><strong>Safety Standards:</strong> Advocate for building inspection requirements that include worker safety compliance</span></div>
+          <div class="point-item"><span class="point-check">✅</span><span class="point-text"><strong>NHIF/NSSF Enrollment:</strong> Organize mass enrollment drives to register workers into social protection systems</span></div>
+          <div class="point-item"><span class="point-check">✅</span><span class="point-text"><strong>Worker SACCO:</strong> Facilitate a Kabiro Mjengo Workers SACCO for savings, loans, and collective bargaining power</span></div>
+          <div class="point-item"><span class="point-check">✅</span><span class="point-text"><strong>Legal Clinics:</strong> Organize free legal aid clinics for workers to understand and assert their rights</span></div>
+          <div class="point-item"><span class="point-check">✅</span><span class="point-text"><strong>Housing Advocacy:</strong> Champion affordable housing projects that prioritize ward-level construction workers</span></div>
+        </div>
+      </div>
+      <div class="reveal from-right">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Construction workers" loading="lazy" style="width:100%; height:400px; object-fit:cover; border-radius:var(--radius-md); margin-bottom:24px;" />
+        <div class="glass-card glass-card-gold">
+          <h4 style="color:var(--gold); margin-bottom:12px; font-family:var(--font-heading);">🔨 Mjengo SACCO Vision</h4>
+          <p style="font-size:0.92rem; margin-bottom:16px;">A dedicated workers SACCO will give Kabiro's construction workforce the financial tools to save, access emergency loans, and build collective wealth — without exploitative lenders.</p>
+          <div class="grid-3-alt" style="gap:12px; margin-top:20px;">
+            <div class="sacco-card"><div class="sacco-icon">💰</div><div class="sacco-title">Savings</div><p style="font-size:0.82rem; color:rgba(255,255,255,0.65);">Monthly savings plans</p></div>
+            <div class="sacco-card"><div class="sacco-icon">💳</div><div class="sacco-title">Loans</div><p style="font-size:0.82rem; color:rgba(255,255,255,0.65);">Emergency credit access</p></div>
+            <div class="sacco-card"><div class="sacco-icon">🛡️</div><div class="sacco-title">Insurance</div><p style="font-size:0.82rem; color:rgba(255,255,255,0.65);">Collective health cover</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonial-band">
+  <div class="testimonial-band-content">
+    <div class="container">
+      <div class="section-title-block centered reveal">
+        <div class="section-label">Voices from the Ground</div>
+        <h2 class="section-title">What Workers <span>Are Saying</span></h2>
+        <div class="gold-divider centered"></div>
+      </div>
+      <div class="grid-3">
+        <div class="testimonial-card reveal">
+          <p class="testimonial-text">"I've worked mjengo for 15 years and never had a contract. Maxwell is the first leader who has ever sat down with us and actually listened to our problems. We believe in him."</p>
+          <div class="testimonial-author">John Mwangi</div>
+          <div class="testimonial-role">Construction Worker, Kabiro</div>
+        </div>
+        <div class="testimonial-card reveal">
+          <p class="testimonial-text">"My husband was injured on site and the contractor gave nothing — no compensation, no hospital. Now we struggle. Maxwell has promised to fight for laws that protect workers like us."</p>
+          <div class="testimonial-author">Grace Achieng</div>
+          <div class="testimonial-role">Wife of Mjengo Worker, Kabiro Ward</div>
+        </div>
+        <div class="testimonial-card reveal">
+          <p class="testimonial-text">"We build beautiful houses for others while living in mud structures ourselves. All we ask for is fair pay and dignity. Changilwa understands this — and that's why he has our votes."</p>
+          <div class="testimonial-author">Patrick Otieno</div>
+          <div class="testimonial-role">Senior Artisan, Kabiro</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bold Quote -->
+<section style="padding:80px 0; background:var(--green-dark);">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <p class="bold-quote">"The men who <span>build Nairobi's skyline</span> deserve a seat at its table — not just its foundation."</p>
+      <p style="margin-top:24px; color:rgba(255,255,255,0.55);">— Maxwell Changilwa</p>
+      <div style="margin-top:36px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <a href="volunteer.html" class="btn btn-primary btn-lg">Join the Movement</a>
+        <a href="donate.html" class="btn btn-outline btn-lg">Support the Cause</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-main"><div class="container"><div class="footer-grid">
+    <div class="footer-brand"><div class="footer-logo"><div class="footer-logo-badge">MC</div><div class="nav-logo-text"><span class="nav-logo-name">Maxwell Changilwa</span><span class="nav-logo-sub">MCA Aspirant · Kabiro Ward</span></div></div><p class="footer-desc">Fighting for justice, dignity, and development for every resident of Kabiro Ward.</p><div class="footer-social"><a href="#" class="social-icon">📘</a><a href="#" class="social-icon">🐦</a><a href="#" class="social-icon">📸</a><a href="https://wa.me/254700000000" class="social-icon">💬</a></div></div>
+    <div><h4 class="footer-heading">Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About Maxwell</a><a href="manifesto.html">Manifesto</a><a href="mjengo-workers.html">Mjengo Workers</a><a href="projects.html">Projects</a></div></div>
+    <div><h4 class="footer-heading">Get Involved</h4><div class="footer-links"><a href="volunteer.html">Volunteer</a><a href="donate.html">Donate</a><a href="gallery.html">Gallery</a><a href="news.html">News</a><a href="contact.html">Contact</a></div></div>
+    <div><h4 class="footer-heading">Contact</h4><div class="footer-contact-item"><span class="footer-contact-icon">📍</span><span>Kabiro Ward, Westlands, Nairobi</span></div><div class="footer-contact-item"><span class="footer-contact-icon">📞</span><span>+254 700 000 000</span></div><form class="newsletter-form" id="newsletterForm" style="margin-top:16px;"><input class="newsletter-input" type="email" placeholder="Your email" required /><button class="newsletter-btn">Join</button></form></div>
+  </div></div></div>
+  <div class="container"><div class="footer-bottom"><p class="footer-bottom-text">© 2025 Maxwell Changilwa Campaign. All rights reserved.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="contact.html">Contact</a></div></div></div>
+</footer>
+<a href="https://wa.me/254700000000" class="whatsapp-float">💬</a>
+<button class="scroll-top" id="scrollTop">↑</button>
+<script src="js/main.js"></script>
+</body>
+</html>

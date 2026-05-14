@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Development Projects — Maxwell Changilwa | Kabiro Ward</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <style>
+    .projects-hero-bg { background: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1800&q=80') center/cover; }
+
+    /* Filter tabs */
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    /* Project Card */
+    .project-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(201,162,39,0.4);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+    .project-card-img {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+    }
+    .project-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s ease;
+    }
+    .project-card:hover .project-card-img img { transform: scale(1.08); }
+    .project-status {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .status-planned { background: rgba(201,162,39,0.85); color: #1a1a1a; }
+    .status-ongoing { background: rgba(26,128,72,0.9); color: #fff; }
+    .status-priority { background: rgba(220,50,50,0.85); color: #fff; }
+    .project-card-body { padding: 24px; }
+    .project-category {
+      font-family: var(--font-accent);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .project-card h3 {
+      font-size: 1.05rem;
+      color: var(--white);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .project-card p { font-size: 0.88rem; margin-bottom: 20px; }
+    .project-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 8px;
+    }
+    .project-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .project-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* Featured project */
+    .featured-project {
+      background: linear-gradient(135deg, rgba(10,79,42,0.3), rgba(5,41,24,0.6));
+      border: 1px solid rgba(201,162,39,0.25);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 56px;
+    }
+    .featured-project-img {
+      height: 420px;
+      object-fit: cover;
+      width: 100%;
+    }
+    .featured-badge {
+      background: var(--gold);
+      color: var(--charcoal);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 50px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+    .featured-project-content { padding: 48px; }
+
+    /* Impact numbers */
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .impact-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .impact-card:hover {
+      border-color: rgba(201,162,39,0.35);
+      background: rgba(201,162,39,0.06);
+    }
+    .impact-card-icon { font-size: 2.4rem; margin-bottom: 12px; }
+    .impact-card-number {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--gold);
+    }
+    .impact-card-label {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .featured-project-content { padding: 28px; }
+      .impact-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .impact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-badge">MC</div>
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">Maxwell Changilwa</span>
+        <span class="nav-logo-sub">MCA Aspirant · Kabiro Ward</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="manifesto.html">Manifesto</a>
+      <a href="mjengo-workers.html">Mjengo</a>
+      <a href="projects.html" class="active">Projects</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="news.html">News</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="volunteer.html" class="btn btn-outline btn-sm">Volunteer</a>
+      <a href="donate.html" class="btn btn-primary btn-sm">Support Campaign</a>
+    </div>
+    <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="manifesto.html">Manifesto</a>
+  <a href="mjengo-workers.html">Mjengo Workers</a>
+  <a href="projects.html">Projects</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="news.html">News</a>
+  <a href="contact.html">Contact</a>
+  <div class="mobile-menu-cta">
+    <a href="volunteer.html" class="btn btn-outline">Volunteer</a>
+    <a href="donate.html" class="btn btn-primary">Support Campaign</a>
+  </div>
+</div>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="page-hero-bg projects-hero-bg"></div>
+  <div class="container page-hero-content">
+    <p class="page-hero-label">Development Agenda</p>
+    <h1 class="page-hero-title">Future Projects for Kabiro</h1>
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <span>Projects</span>
+    </div>
+  </div>
+</div>
+
+<!-- Intro -->
+<section style="background:linear-gradient(135deg,var(--green-dark),var(--charcoal)); padding:72px 0;">
+  <div class="container">
+    <div class="grid-2" style="gap:64px; align-items:center;">
+      <div class="reveal from-left">
+        <div class="section-label">Our Commitment</div>
+        <h2 class="section-title">Real Plans. <span>Measurable Results.</span></h2>
+        <div class="gold-divider"></div>
+        <p style="margin-bottom:16px;">Every project below is drawn from community consultations — real problems identified by real Kabiro residents. These are not empty promises; they are a structured development agenda with timelines and accountability built in.</p>
+        <p>Maxwell Changilwa commits to regular public progress updates, transparent budgeting, and community oversight for every project implemented.</p>
+      </div>
+      <div class="reveal from-right">
+        <div class="impact-grid" style="grid-template-columns:1fr 1fr; margin-top:0;">
+          <div class="impact-card">
+            <div class="impact-card-icon">🛣️</div>
+            <div class="impact-card-number" data-count="15" data-suffix="+">0+</div>
+            <div class="impact-card-label">Road Projects</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-card-icon">💧</div>
+            <div class="impact-card-number" data-count="8">0</div>
+            <div class="impact-card-label">Water Points</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-card-icon">💡</div>
+            <div class="impact-card-number" data-count="200" data-suffix="+">0+</div>
+            <div class="impact-card-label">Street Lights</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-card-icon">🏗️</div>
+            <div class="impact-card-number" data-count="25" data-suffix="+">0+</div>
+            <div class="impact-card-label">Total Projects</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Project -->
+<section class="section-pad bg-dark">
+  <div class="container">
+    <div class="section-title-block centered reveal">
+      <div class="section-label">Flagship Initiative</div>
+      <h2 class="section-title">Priority <span>Development Plan</span></h2>
+      <div class="gold-divider centered"></div>
+    </div>
+
+    <div class="featured-project reveal">
+      <img class="featured-project-img" src="https://images.unsplash.com/photo-1565008576549-57569a49f94c?w=1400&q=80" alt="Kabiro Road Project" loading="lazy" />
+      <div class="featured-project-content">
+        <div class="grid-2" style="gap:48px; align-items:start;">
+          <div>
+            <span class="featured-badge">⭐ Flagship Project</span>
+            <h2 style="font-size:1.8rem; margin-bottom:16px;">Kabiro Ward Road Network Upgrade</h2>
+            <p style="margin-bottom:24px;">A comprehensive plan to tarmac, grade, and maintain all major access roads within Kabiro Ward. This project directly impacts every resident's daily commute, business access, and emergency response times.</p>
+            <div class="point-list">
+              <div class="point-item"><span class="point-check">✅</span><span class="point-text">5km of new tarmac road across key arterial routes</span></div>
+              <div class="point-item"><span class="point-check">✅</span><span class="point-text">Grading and drainage repair on 12km of feeder roads</span></div>
+              <div class="point-item"><span class="point-check">✅</span><span class="point-text">Installation of speed bumps at school zones and market areas</span></div>
+            </div>
+          </div>
+          <div>
+            <div class="progress-wrap">
+              <div class="progress-label"><span>Planning & Design</span><span style="color:var(--gold);">80%</span></div>
+              <div class="progress-bar"><div class="progress-fill" data-width="80"></div></div>
+            </div>
+            <div class="progress-wrap">
+              <div class="progress-label"><span>Community Consultation</span><span style="color:var(--gold);">100%</span></div>
+              <div class="progress-bar"><div class="progress-fill" data-width="100"></div></div>
+            </div>
+            <div class="progress-wrap">
+              <div class="progress-label"><span>Funding Mobilization</span><span style="color:var(--gold);">45%</span></div>
+              <div class="progress-bar"><div class="progress-fill" data-width="45"></div></div>
+            </div>
+            <div class="progress-wrap">
+              <div class="progress-label"><span>Implementation</span><span style="color:var(--gold);">0%</span></div>
+              <div class="progress-bar"><div class="progress-fill" data-width="0"></div></div>
+            </div>
+            <div style="margin-top:24px; padding:16px; background:rgba(201,162,39,0.1); border:1px solid rgba(201,162,39,0.25); border-radius:var(--radius-sm);">
+              <p style="font-size:0.88rem;"><strong style="color:var(--gold);">Timeline:</strong> Construction begins Q3 2027 upon election</p>
+              <p style="font-size:0.88rem; margin-top:6px;"><strong style="color:var(--gold);">Budget:</strong> KES 45 Million (County Allocation + NG-CDF)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-bar reveal">
+      <button class="tag active" data-filter-btn="all" data-filter-group="projects">All Projects</button>
+      <button class="tag" data-filter-btn="infrastructure" data-filter-group="projects">🛣️ Infrastructure</button>
+      <button class="tag" data-filter-btn="water" data-filter-group="projects">💧 Water</button>
+      <button class="tag" data-filter-btn="youth" data-filter-group="projects">🎓 Youth</button>
+      <button class="tag" data-filter-btn="health" data-filter-group="projects">🏥 Health</button>
+      <button class="tag" data-filter-btn="market" data-filter-group="projects">🏪 Markets</button>
+      <button class="tag" data-filter-btn="environment" data-filter-group="projects">🌿 Environment</button>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="grid-3" id="projectsGrid">
+
+      <div class="project-card reveal" data-filter-item="infrastructure">
+        <div class="project-card-img">
+          <img src="https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=600&q=80" alt="Street Lights" loading="lazy" />
+          <span class="project-status status-planned">Planned</span>
+        </div>
+        <div class="project-card-body">
+          <div class="project-category">⚡ Infrastructure</div>
+          <h3>Solar Street Lighting Network</h3>
+          <p>Installation of 200+ solar-powered street lights along all major roads, market areas, and dark alleys across Kabiro Ward.</p>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Progress</span><span style="color:var(--gold);">25%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="25"></div></div>
+          </div>
+          <div class="project-meta">
+            <div class="project-meta-item">📅 <span>Q4 2027</span></div>
+            <div class="project-meta-item">💰 <span>KES 12M</span></div>
+            <div class="project-meta-item">👥 <span>50,000 beneficiaries</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-filter-item="water">
+        <div class="project-card-img">
+          <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&q=80" alt="Water Project" loading="lazy" />
+          <span class="project-status status-priority">Priority</span>
+        </div>
+        <div class="project-card-body">
+          <div class="project-category">💧 Water & Sanitation</div>
+          <h3>Community Water Access Points</h3>
+          <p>Install 8 clean water access points in underserved sub-locations of Kabiro, ensuring affordable clean water for thousands.</p>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Progress</span><span style="color:var(--gold);">40%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="40"></div></div>
+          </div>
+          <div class="project-meta">
+            <div class="project-meta-item">📅 <span>Q2 2027</span></div>
+            <div class="project-meta-item">💰 <span>KES 8M</span></div>
+            <div class="project-meta-item">👥 <span>15,000 beneficiaries</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-filter-item="youth">
+        <div class="project-card-img">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Youth Center" loading="lazy" />
+          <span class="project-status status-planned">Planned</span>
+        </div>
+        <div class="project-card-body">
+          <div class="project-category">🎓 Youth Empowerment</div>
+          <h3>Kabiro Digital Youth Hub</h3>
+          <p>A modern digital center with computers, free Wi-Fi, coding bootcamps, and entrepreneurship training for 500+ youth annually.</p>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Progress</span><span style="color:var(--gold);">60%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="60"></div></div>
+          </div>
+          <div class="project-meta">
+            <div class="project-meta-item">📅 <span>Q1 2028</span></div>
+            <div class="project-meta-item">💰 <span>KES 20M</span></div>
+            <div class="project-meta-item">👥 <span>500+ youth/yr</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-filter-item="market">
+        <div class="project-card-img">
+          <img src="https://images.unsplash.com/photo-1595528889916-b9c7e2e43a79?w=600&q=80" alt="Market" loading="lazy" />
+          <span class="project-status status-planned">Planned</span>
+        </div>
+        <div class="project-card-body">
+          <div class="project-category">🏪 Markets & Trade</div>
+          <h3>Kabiro Open-Air Market Upgrade</h3>
+          <p>Redesign and upgrade the main market with organized stalls, weather protection, clean toilets, and proper drainage systems.</p>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Progress</span><span style="color:var(--gold);">30%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="30"></div></div>
+          </div>
+          <div class="project-meta">
+            <div class="project-meta-item">📅 <span>Q3 2027</span></div>
+            <div class="project-meta-item">💰 <span>KES 15M</span></div>
+            <div class="project-meta-item">👥 <span>300 traders</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-filter-item="health">
+        <div class="project-card-img">
+          <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&q=80" alt="Health Center" loading="lazy" />
+          <span class="project-status status-priority">Priority</span>
+        </div>
+        <div class="project-card-body">
+          <div class="project-category">🏥 Healthcare</div>
+          <h3>Dispensary Equipment Upgrade</h3>
+          <p>Supply modern medical equipment, essential drugs, and additional nursing staff to the Kabiro ward dispensary facility.</p>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Progress</span><span style="color:var(--gold);">50%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="50"></div></div>
+          </div>
+          <div class="project-meta">
+            <div class="project-meta-item">📅 <span>Q2 2027</span></div>
+            <div class="project-meta-item">💰 <span>KES 6M</span></div>
+            <div class="project-meta-item">👥 <span>20,000 patients/yr</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-filter-item="youth">
+        <div class="project-card-img">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80" alt="Sports Ground" loading="lazy" />
+          <span class="project-status status-planned">Planned</span>
+        </div>
+        <div class="project-card-body">
+          <div class="project-category">⚽ Sports & Recreation</div>
+          <h3>Community Sports & Recreation Ground</h3>
+          <p>Develop a multi-purpose sports ground with a football pitch, basketball court, and athletics track for Kabiro youth.</p>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Progress</span><span style="color:var(--gold);">20%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="20"></div></div>
+          </div>
+          <div class="project-meta">
+            <div class="project-meta-item">📅 <span>Q4 2028</span></div>
+            <div class="project-meta-item">💰 <span>KES 25M</span></div>
+            <div class="project-meta-item">👥 <span>5,000+ youth</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-filter-item="environment">
+        <div class="project-card-img">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Waste Management" loading="lazy" />
+          <span class="project-status status-ongoing">Ongoing</span>
+        </div>
+        <div class="project-card-body">
+          <div class="project-category">🌿 Environment</div>
+          <h3>Improved Waste Management System</h3>
+          <p>Deploy additional skip bins, improve collection schedules, and create awareness on waste segregation and recycling in the ward.</p>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Progress</span><span style="color:var(--gold);">70%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="70"></div></div>
+          </div>
+          <div class="project-meta">
+            <div class="project-meta-item">📅 <span>Q2 2027</span></div>
+            <div class="project-meta-item">💰 <span>KES 4M</span></div>
+            <div class="project-meta-item">👥 <span>All residents</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-filter-item="water">
+        <div class="project-card-img">
+          <img src="https://images.unsplash.com/photo-1581093458791-9d42e3c7e117?w=600&q=80" alt="Sanitation" loading="lazy" />
+          <span class="project-status status-planned">Planned</span>
+        </div>
+        <div class="project-card-body">
+          <div class="project-category">🚽 Sanitation</div>
+          <h3>Public Sanitation Block Construction</h3>
+          <p>Build 5 modern public sanitation blocks with proper drainage, handwashing stations, and disability access across the ward.</p>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Progress</span><span style="color:var(--gold);">35%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="35"></div></div>
+          </div>
+          <div class="project-meta">
+            <div class="project-meta-item">📅 <span>Q3 2027</span></div>
+            <div class="project-meta-item">💰 <span>KES 10M</span></div>
+            <div class="project-meta-item">👥 <span>30,000 users</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-filter-item="infrastructure">
+        <div class="project-card-img">
+          <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=600&q=80" alt="Footbridge" loading="lazy" />
+          <span class="project-status status-planned">Planned</span>
+        </div>
+        <div class="project-card-body">
+          <div class="project-category">🌉 Infrastructure</div>
+          <h3>Pedestrian Walkways & Footpaths</h3>
+          <p>Construct safe, paved pedestrian paths along key school routes and market access corridors throughout Kabiro Ward.</p>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Progress</span><span style="color:var(--gold);">15%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="15"></div></div>
+          </div>
+          <div class="project-meta">
+            <div class="project-meta-item">📅 <span>Q1 2028</span></div>
+            <div class="project-meta-item">💰 <span>KES 18M</span></div>
+            <div class="project-meta-item">👥 <span>All pedestrians</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:linear-gradient(135deg,var(--green-primary),var(--green-dark)); padding:80px 0; text-align:center;">
+  <div class="container reveal">
+    <div class="section-label" style="margin-bottom:20px;">Help Us Build Kabiro</div>
+    <h2 class="section-title" style="max-width:660px; margin:0 auto 20px;">Your Support Turns <span>Plans into Reality</span></h2>
+    <p style="max-width:540px; margin:0 auto 40px; color:rgba(255,255,255,0.72); font-size:1.05rem;">Every contribution — financial or volunteer — helps us execute these projects and deliver lasting change to Kabiro Ward.</p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <a href="donate.html" class="btn btn-primary btn-lg">💚 Fund a Project</a>
+      <a href="volunteer.html" class="btn btn-outline btn-lg">🤝 Volunteer Skills</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-main"><div class="container"><div class="footer-grid">
+    <div class="footer-brand"><div class="footer-logo"><div class="footer-logo-badge">MC</div><div class="nav-logo-text"><span class="nav-logo-name">Maxwell Changilwa</span><span class="nav-logo-sub">MCA Aspirant · Kabiro Ward</span></div></div><p class="footer-desc">Fighting for justice, dignity, and development for every resident of Kabiro Ward.</p><div class="footer-social"><a href="#" class="social-icon">📘</a><a href="#" class="social-icon">🐦</a><a href="#" class="social-icon">📸</a><a href="https://wa.me/254700000000" class="social-icon">💬</a></div></div>
+    <div><h4 class="footer-heading">Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About Maxwell</a><a href="manifesto.html">Manifesto</a><a href="mjengo-workers.html">Mjengo Workers</a><a href="projects.html">Projects</a></div></div>
+    <div><h4 class="footer-heading">Get Involved</h4><div class="footer-links"><a href="volunteer.html">Volunteer</a><a href="donate.html">Donate</a><a href="gallery.html">Gallery</a><a href="news.html">News</a><a href="contact.html">Contact</a></div></div>
+    <div><h4 class="footer-heading">Contact</h4><div class="footer-contact-item"><span class="footer-contact-icon">📍</span><span>Kabiro Ward, Westlands, Nairobi</span></div><div class="footer-contact-item"><span class="footer-contact-icon">📞</span><span>+254 700 000 000</span></div><form class="newsletter-form" id="newsletterForm" style="margin-top:16px;"><input class="newsletter-input" type="email" placeholder="Your email" required /><button class="newsletter-btn">Join</button></form></div>
+  </div></div></div>
+  <div class="container"><div class="footer-bottom"><p class="footer-bottom-text">© 2025 Maxwell Changilwa Campaign. All rights reserved.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="contact.html">Contact</a></div></div></div>
+</footer>
+
+<a href="https://wa.me/254700000000" class="whatsapp-float">💬</a>
+<button class="scroll-top" id="scrollTop">↑</button>
+<script src="js/main.js"></script>
+</body>
+</html>

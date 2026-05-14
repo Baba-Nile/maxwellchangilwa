@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — Maxwell Changilwa | Kabiro Ward</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <style>
+    .gallery-hero-bg { background: url('https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=1800&q=80') center/cover; }
+
+    /* Gallery filter */
+    .gallery-filter {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    /* Featured gallery strip */
+    .gallery-featured {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 12px;
+      height: 520px;
+      margin-bottom: 48px;
+    }
+    .gallery-featured .gf-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+    .gallery-featured .gf-item:first-child {
+      grid-row: 1 / 3;
+    }
+    .gallery-featured .gf-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s ease;
+    }
+    .gallery-featured .gf-item:hover img { transform: scale(1.07); }
+    .gf-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10,79,42,0.0);
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+      transition: var(--transition);
+    }
+    .gf-item:hover .gf-overlay {
+      background: rgba(10,79,42,0.6);
+    }
+    .gf-label {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: var(--transition);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--white);
+    }
+    .gf-item:hover .gf-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .gf-zoom {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.7);
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 2px solid rgba(255,255,255,0.4);
+      border-radius: 50%;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .gf-item:hover .gf-zoom {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Masonry gallery */
+    .masonry-gallery {
+      columns: 4;
+      column-gap: 14px;
+    }
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 14px;
+      position: relative;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .masonry-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.55s ease;
+    }
+    .masonry-item:hover img { transform: scale(1.06); }
+    .masonry-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10,79,42,0);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+    .masonry-item:hover .masonry-overlay {
+      background: rgba(10,79,42,0.65);
+    }
+    .masonry-overlay-icon {
+      font-size: 1.8rem;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: var(--transition);
+    }
+    .masonry-item:hover .masonry-overlay-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .masonry-overlay-cat {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: var(--transition);
+    }
+    .masonry-item:hover .masonry-overlay-cat {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Lightbox enhanced */
+    .lightbox { position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.97); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; flex-direction: column; gap: 16px; padding: 20px; }
+    .lightbox.active { opacity: 1; pointer-events: all; }
+    .lightbox-img { max-height: 82vh; max-width: 90vw; border-radius: 8px; object-fit: contain; }
+    .lightbox-close { position: absolute; top: 24px; right: 32px; font-size: 2rem; color: var(--white); cursor: pointer; background: none; border: none; opacity: 0.7; transition: var(--transition-fast); }
+    .lightbox-close:hover { opacity: 1; color: var(--gold); }
+    .lightbox-prev, .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      width: 50px; height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: white;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    .lightbox-prev { left: 24px; }
+    .lightbox-next { right: 24px; }
+    .lightbox-prev:hover, .lightbox-next:hover { background: var(--gold); color: var(--charcoal); }
+    .lightbox-caption { color: rgba(255,255,255,0.65); font-size: 0.88rem; text-align: center; max-width: 600px; }
+    .lightbox-counter { color: rgba(255,255,255,0.4); font-size: 0.82rem; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); }
+
+    @media (max-width: 1024px) { .masonry-gallery { columns: 3; } .gallery-featured { grid-template-columns: 1.5fr 1fr; height: auto; } .gallery-featured .gf-item:first-child { grid-row: auto; } }
+    @media (max-width: 768px) { .masonry-gallery { columns: 2; } .gallery-featured { grid-template-columns: 1fr 1fr; height: auto; } }
+    @media (max-width: 480px) { .masonry-gallery { columns: 1; } .gallery-featured { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="nav-logo-badge">MC</div><div class="nav-logo-text"><span class="nav-logo-name">Maxwell Changilwa</span><span class="nav-logo-sub">MCA Aspirant · Kabiro Ward</span></div></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="manifesto.html">Manifesto</a>
+      <a href="mjengo-workers.html">Mjengo</a><a href="projects.html">Projects</a>
+      <a href="gallery.html" class="active">Gallery</a><a href="news.html">News</a><a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="volunteer.html" class="btn btn-outline btn-sm">Volunteer</a>
+      <a href="donate.html" class="btn btn-primary btn-sm">Support Campaign</a>
+    </div>
+    <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="manifesto.html">Manifesto</a>
+  <a href="mjengo-workers.html">Mjengo Workers</a><a href="projects.html">Projects</a>
+  <a href="gallery.html">Gallery</a><a href="news.html">News</a><a href="contact.html">Contact</a>
+  <div class="mobile-menu-cta"><a href="volunteer.html" class="btn btn-outline">Volunteer</a><a href="donate.html" class="btn btn-primary">Support Campaign</a></div>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-bg gallery-hero-bg"></div>
+  <div class="container page-hero-content">
+    <p class="page-hero-label">Visual Stories</p>
+    <h1 class="page-hero-title">Campaign Gallery</h1>
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Gallery</span></div>
+  </div>
+</div>
+
+<!-- Gallery Section -->
+<section class="section-pad bg-dark">
+  <div class="container">
+
+    <!-- Featured Strip -->
+    <div class="section-title-block centered reveal">
+      <div class="section-label">Featured Moments</div>
+      <h2 class="section-title">Stories from <span>Kabiro Ward</span></h2>
+      <div class="gold-divider centered"></div>
+      <p class="section-subtitle">Real moments. Real people. Real change in the making.</p>
+    </div>
+
+    <div class="gallery-featured reveal">
+      <div class="gf-item" onclick="openLightbox(0)">
+        <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=900&q=80" alt="Community Meeting" loading="lazy" />
+        <div class="gf-overlay">
+          <div class="gf-zoom">🔍</div>
+          <span class="gf-label">Community Town Hall — Kabiro Ward</span>
+        </div>
+      </div>
+      <div class="gf-item" onclick="openLightbox(1)">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Youth Rally" loading="lazy" />
+        <div class="gf-overlay">
+          <div class="gf-zoom">🔍</div>
+          <span class="gf-label">Youth Mobilization Drive</span>
+        </div>
+      </div>
+      <div class="gf-item" onclick="openLightbox(2)">
+        <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=600&q=80" alt="Women Forum" loading="lazy" />
+        <div class="gf-overlay">
+          <div class="gf-zoom">🔍</div>
+          <span class="gf-label">Women Biashara Forum</span>
+        </div>
+      </div>
+      <div class="gf-item" onclick="openLightbox(3)">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Mjengo Workers" loading="lazy" />
+        <div class="gf-overlay">
+          <div class="gf-zoom">🔍</div>
+          <span class="gf-label">Mjengo Workers Engagement</span>
+        </div>
+      </div>
+      <div class="gf-item" onclick="openLightbox(4)">
+        <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600&q=80" alt="Campaign" loading="lazy" />
+        <div class="gf-overlay">
+          <div class="gf-zoom">🔍</div>
+          <span class="gf-label">Community Outreach Campaign</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="gallery-filter reveal">
+      <button class="tag active" data-filter-btn="all" data-filter-group="gallery">All Photos</button>
+      <button class="tag" data-filter-btn="campaign" data-filter-group="gallery">📣 Campaign</button>
+      <button class="tag" data-filter-btn="community" data-filter-group="gallery">🏘️ Community</button>
+      <button class="tag" data-filter-btn="youth" data-filter-group="gallery">🎓 Youth</button>
+      <button class="tag" data-filter-btn="workers" data-filter-group="gallery">👷 Workers</button>
+      <button class="tag" data-filter-btn="women" data-filter-group="gallery">👩 Women</button>
+    </div>
+
+    <!-- Masonry Grid -->
+    <div class="masonry-gallery" id="galleryGrid">
+
+      <div class="masonry-item" data-filter-item="community" onclick="openLightbox(5)">
+        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=500&q=80" alt="Community" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-overlay-icon">🔍</span><span class="masonry-overlay-cat">Community</span></div>
+      </div>
+
+      <div class="masonry-item" data-filter-item="youth" onclick="openLightbox(6)">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500&q=80" alt="Youth Sports" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-overlay-icon">🔍</span><span class="masonry-overlay-cat">Youth Sports</span></div>
+      </div>
+
+      <div class="masonry-item" data-filter-item="workers" onclick="openLightbox(7)">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=500&q=80" alt="Infrastructure" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-overlay-icon">🔍</span><span class="masonry-overlay-cat">Infrastructure</span></div>
+      </div>
+
+      <div class="masonry-item" data-filter-item="women" onclick="openLightbox(8)">
+        <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=500&q=80" alt="Women" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-overlay-icon">🔍</span><span class="masonry-overlay-cat">Women Empowerment</span></div>
+      </div>
+
+      <div class="masonry-item" data-filter-item="campaign" onclick="openLightbox(9)">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&q=80" alt="Campaign" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-overlay-icon">🔍</span><span class="masonry-overlay-cat">Campaign Rally</span></div>
+      </div>
+
+      <div class="masonry-item" data-filter-item="community" onclick="openLightbox(10)">
+        <img src="https://images.unsplash.com/photo-1595528889916-b9c7e2e43a79?w=500&q=80" alt="Market" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-overlay-icon">🔍</span><span class="masonry-overlay-cat">Kabiro Market</span></div>
+      </div>
+
+      <div class="masonry-item" data-filter-item="workers" onclick="openLightbox(11)">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&q=80" alt="Workers" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-overlay-icon">🔍</span><span class="masonry-overlay-cat">Mjengo Workers</span></div>
+      </div>
+
+      <div class="masonry-item" data-filter-item="youth" onclick="openLightbox(12)">
+        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&q=80" alt="Digital" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-overlay-icon">🔍</span><span class="masonry-overlay-cat">Digital Training</span></div>
+      </div>
+
+      <div class="masonry-item" data-filter-item="community" onclick="openLightbox(13)">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500&q=80" alt="Environment" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-overlay-icon">🔍</span><span class="masonry-overlay-cat">Environment Initiative</span></div>
+      </div>
+
+      <div class="masonry-item" data-filter-item="women" onclick="openLightbox(14)">
+        <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=500&q=80" alt="Women Forum" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-overlay-icon">🔍</span><span class="masonry-overlay-cat">Women Forum</span></div>
+      </div>
+
+      <div class="masonry-item" data-filter-item="campaign" onclick="openLightbox(15)">
+        <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=500&q=80" alt="Town Hall" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-overlay-icon">🔍</span><span class="masonry-overlay-cat">Town Hall Meeting</span></div>
+      </div>
+
+      <div class="masonry-item" data-filter-item="youth" onclick="openLightbox(16)">
+        <img src="https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=500&q=80" alt="Roads" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-overlay-icon">🔍</span><span class="masonry-overlay-cat">Road Inspection</span></div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center; margin-top:48px;" class="reveal">
+      <button class="btn btn-outline btn-lg" id="loadMoreBtn" onclick="loadMore()">Load More Photos ↓</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <button class="lightbox-prev" id="lightboxPrev">←</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="Gallery" />
+  <p class="lightbox-caption" id="lightboxCaption"></p>
+  <button class="lightbox-next" id="lightboxNext">→</button>
+  <span class="lightbox-counter" id="lightboxCounter"></span>
+</div>
+
+<footer class="footer">
+  <div class="footer-main"><div class="container"><div class="footer-grid">
+    <div class="footer-brand"><div class="footer-logo"><div class="footer-logo-badge">MC</div><div class="nav-logo-text"><span class="nav-logo-name">Maxwell Changilwa</span><span class="nav-logo-sub">MCA Aspirant · Kabiro Ward</span></div></div><p class="footer-desc">Fighting for justice, dignity, and development for every resident of Kabiro Ward.</p><div class="footer-social"><a href="#" class="social-icon">📘</a><a href="#" class="social-icon">🐦</a><a href="#" class="social-icon">📸</a><a href="https://wa.me/254700000000" class="social-icon">💬</a></div></div>
+    <div><h4 class="footer-heading">Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About Maxwell</a><a href="manifesto.html">Manifesto</a><a href="mjengo-workers.html">Mjengo Workers</a><a href="projects.html">Projects</a></div></div>
+    <div><h4 class="footer-heading">Get Involved</h4><div class="footer-links"><a href="volunteer.html">Volunteer</a><a href="donate.html">Donate</a><a href="gallery.html">Gallery</a><a href="news.html">News</a><a href="contact.html">Contact</a></div></div>
+    <div><h4 class="footer-heading">Contact</h4><div class="footer-contact-item"><span class="footer-contact-icon">📍</span><span>Kabiro Ward, Westlands, Nairobi</span></div><div class="footer-contact-item"><span class="footer-contact-icon">📞</span><span>+254 700 000 000</span></div><form class="newsletter-form" id="newsletterForm" style="margin-top:16px;"><input class="newsletter-input" type="email" placeholder="Your email" required /><button class="newsletter-btn">Join</button></form></div>
+  </div></div></div>
+  <div class="container"><div class="footer-bottom"><p class="footer-bottom-text">© 2025 Maxwell Changilwa Campaign. All rights reserved.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="contact.html">Contact</a></div></div></div>
+</footer>
+
+<a href="https://wa.me/254700000000" class="whatsapp-float">💬</a>
+<button class="scroll-top" id="scrollTop">↑</button>
+
+<script src="js/main.js"></script>
+<script>
+  // Gallery lightbox data
+  const galleryData = [
+    { src: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=1200&q=85', caption: 'Community Town Hall — Kabiro Ward, Nairobi' },
+    { src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=85', caption: 'Youth Mobilization Drive — Kabiro 2025' },
+    { src: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=1200&q=85', caption: 'Women Biashara Forum — Empowering Female Traders' },
+    { src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=85', caption: 'Mjengo Workers Engagement — Advocating for Fair Pay' },
+    { src: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=1200&q=85', caption: 'Community Outreach Campaign — Kabiro Ward' },
+    { src: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&q=85', caption: 'Community Leadership Forum' },
+    { src: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=85', caption: 'Youth Sports Development Program' },
+    { src: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=85', caption: 'Infrastructure Assessment — Kabiro Roads' },
+    { src: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=1200&q=85', caption: 'Women Empowerment Session' },
+    { src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=85', caption: 'Campaign Rally — Kabiro Residents' },
+    { src: 'https://images.unsplash.com/photo-1595528889916-b9c7e2e43a79?w=1200&q=85', caption: 'Kabiro Market — Supporting Local Traders' },
+    { src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=85', caption: 'Mjengo Workers Forum — Nairobi Construction Sites' },
+    { src: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&q=85', caption: 'Digital Skills Training for Kabiro Youth' },
+    { src: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&q=85', caption: 'Environmental Clean-Up Initiative' },
+    { src: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=1200&q=85', caption: 'Women Leadership Forum — Kabiro Ward' },
+    { src: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=1200&q=85', caption: 'Town Hall Public Participation' },
+    { src: 'https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=1200&q=85', caption: 'Road Condition Assessment Visit' },
+  ];
+
+  let currentIdx = 0;
+
+  function openLightbox(idx) {
+    currentIdx = idx;
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function updateLightbox() {
+    const item = galleryData[currentIdx];
+    if (!item) return;
+    const img = document.getElementById('lightboxImg');
+    const cap = document.getElementById('lightboxCaption');
+    const ctr = document.getElementById('lightboxCounter');
+    img.src = item.src;
+    img.alt = item.caption;
+    if (cap) cap.textContent = item.caption;
+    if (ctr) ctr.textContent = `${currentIdx + 1} / ${galleryData.length}`;
+  }
+
+  function closeLB() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('lightboxClose')?.addEventListener('click', closeLB);
+  document.getElementById('lightbox')?.addEventListener('click', (e) => { if (e.target.id === 'lightbox') closeLB(); });
+  document.getElementById('lightboxPrev')?.addEventListener('click', (e) => { e.stopPropagation(); currentIdx = (currentIdx - 1 + galleryData.length) % galleryData.length; updateLightbox(); });
+  document.getElementById('lightboxNext')?.addEventListener('click', (e) => { e.stopPropagation(); currentIdx = (currentIdx + 1) % galleryData.length; updateLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLB();
+    if (e.key === 'ArrowLeft') { currentIdx = (currentIdx - 1 + galleryData.length) % galleryData.length; updateLightbox(); }
+    if (e.key === 'ArrowRight') { currentIdx = (currentIdx + 1) % galleryData.length; updateLightbox(); }
+  });
+
+  function loadMore() {
+    const btn = document.getElementById('loadMoreBtn');
+    btn.textContent = 'Loading...';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'All photos loaded ✓';
+      btn.disabled = true;
+      btn.style.opacity = '0.5';
+    }, 1000);
+  }
+</script>
+</body>
+</html>

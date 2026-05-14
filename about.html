@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Maxwell Changilwa — MCA Aspirant | Kabiro Ward</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <style>
+    .about-hero-bg { background: url('https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=1800&q=80') center 30%/cover; }
+    .profile-img-wrap {
+      position: relative;
+      display: inline-block;
+    }
+    .profile-img {
+      width: 100%;
+      max-width: 460px;
+      height: 560px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      display: block;
+    }
+    .profile-badge {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--charcoal);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      text-align: center;
+      box-shadow: var(--shadow-gold);
+    }
+    .profile-badge-num { font-size: 2.2rem; }
+    .profile-badge-lbl { font-size: 0.78rem; letter-spacing: 0.06em; }
+    .profile-frame {
+      position: absolute;
+      top: -12px; left: -12px; right: 12px; bottom: 12px;
+      border: 2px solid rgba(201,162,39,0.3);
+      border-radius: var(--radius-lg);
+      pointer-events: none;
+    }
+    .value-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-sm);
+      transition: var(--transition-fast);
+    }
+    .value-card:hover { border-color: rgba(201,162,39,0.3); }
+    .value-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .value-title { font-weight: 700; color: var(--white); font-size: 0.95rem; }
+    .value-desc { font-size: 0.88rem; color: rgba(255,255,255,0.6); }
+    .achievements-list { display: flex; flex-direction: column; gap: 16px; }
+    .achievement-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 22px;
+      background: rgba(255,255,255,0.04);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .achievement-icon { font-size: 1.4rem; }
+    .achievement-text { font-size: 0.92rem; color: rgba(255,255,255,0.8); }
+  </style>
+</head>
+<body>
+
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-badge">MC</div>
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">Maxwell Changilwa</span>
+        <span class="nav-logo-sub">MCA Aspirant · Kabiro Ward</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="manifesto.html">Manifesto</a>
+      <a href="mjengo-workers.html">Mjengo</a>
+      <a href="projects.html">Projects</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="news.html">News</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="volunteer.html" class="btn btn-outline btn-sm">Volunteer</a>
+      <a href="donate.html" class="btn btn-primary btn-sm">Support Campaign</a>
+    </div>
+    <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="manifesto.html">Manifesto</a>
+  <a href="mjengo-workers.html">Mjengo Workers</a><a href="projects.html">Projects</a>
+  <a href="gallery.html">Gallery</a><a href="news.html">News</a><a href="contact.html">Contact</a>
+  <div class="mobile-menu-cta">
+    <a href="volunteer.html" class="btn btn-outline">Volunteer</a>
+    <a href="donate.html" class="btn btn-primary">Support Campaign</a>
+  </div>
+</div>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="page-hero-bg about-hero-bg"></div>
+  <div class="container page-hero-content">
+    <p class="page-hero-label">Learn More</p>
+    <h1 class="page-hero-title">About Maxwell Changilwa</h1>
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <span>About</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BIO SECTION ===== -->
+<section class="section-pad bg-dark">
+  <div class="container">
+    <div class="grid-2" style="gap:80px; align-items:center;">
+      <div class="reveal from-left" style="text-align:center;">
+        <div class="profile-img-wrap">
+          <div class="profile-frame"></div>
+          <img class="profile-img" src="images/WhatsApp Image 2026-05-12 at 07.54.27.jpeg" alt="Maxwell Changilwa" loading="lazy" />
+          <div class="profile-badge">
+            <div class="profile-badge-num">10+</div>
+            <div class="profile-badge-lbl">Years of Community Service</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal from-right">
+        <div class="section-label">Biography</div>
+        <h2 class="section-title">A Son of <span>Kabiro</span></h2>
+        <div class="gold-divider"></div>
+        <p style="margin-bottom:16px;">Hon. Maxwell Changilwa was born and raised in the vibrant community of Kabiro Ward — a place he calls home, his teacher, and his greatest motivation. From a young age, he witnessed firsthand the struggles of ordinary residents: flooded roads, jobless youth, exploited construction workers, and mothers walking miles for clean water.</p>
+        <p style="margin-bottom:16px;">Rather than leave these challenges behind, Maxwell chose to stay, organize, and fight for his community. He spent over a decade building grassroots networks, mobilizing youth, defending workers, and advocating for women's economic empowerment.</p>
+        <p style="margin-bottom:32px;">Today, he stands as the voice of the voiceless — the hustler, the mama mboga, the mjengo worker, and the young graduate waiting for their first break.</p>
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+          <a href="manifesto.html" class="btn btn-primary">View Manifesto</a>
+          <a href="contact.html" class="btn btn-outline">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VALUES ===== -->
+<section class="section-pad bg-darker">
+  <div class="container">
+    <div class="section-title-block centered reveal">
+      <div class="section-label">Core Values</div>
+      <h2 class="section-title">What Maxwell <span>Stands For</span></h2>
+      <div class="gold-divider centered"></div>
+    </div>
+    <div class="grid-3">
+      <div class="value-card reveal">
+        <div class="value-icon">⚖️</div>
+        <div>
+          <div class="value-title">Justice for All</div>
+          <p class="value-desc">Every resident deserves equal access to resources, services, and opportunities regardless of background.</p>
+        </div>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">🔍</div>
+        <div>
+          <div class="value-title">Transparency</div>
+          <p class="value-desc">Public resources will be managed openly, with regular community accountability forums.</p>
+        </div>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">🤝</div>
+        <div>
+          <div class="value-title">Servant Leadership</div>
+          <p class="value-desc">Leading from the front, not from behind a desk. Always accessible to the people of Kabiro.</p>
+        </div>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">💪</div>
+        <div>
+          <div class="value-title">Worker Dignity</div>
+          <p class="value-desc">Every laborer — from mjengo to market — deserves fair pay, safe conditions, and social protection.</p>
+        </div>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">🌍</div>
+        <div>
+          <div class="value-title">Inclusive Development</div>
+          <p class="value-desc">Development that reaches every corner of Kabiro, leaving no sub-location, household, or individual behind.</p>
+        </div>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">🏆</div>
+        <div>
+          <div class="value-title">Accountability</div>
+          <p class="value-desc">Committed to regular reporting, open budgets, and responsive governance throughout the term.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TIMELINE ===== -->
+<section class="section-pad bg-dark">
+  <div class="container">
+    <div class="grid-2" style="gap:72px; align-items:start;">
+      <div class="reveal from-left">
+        <div class="section-label">Leadership Journey</div>
+        <h2 class="section-title">From Streets to <span>Service</span></h2>
+        <div class="gold-divider"></div>
+        <p style="margin-bottom:44px;">Maxwell's path to leadership was forged through years of grassroots work, community organizing, and a relentless belief that Kabiro can be better.</p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2010 — 2013</div>
+            <div class="timeline-title">Community Youth Organizer</div>
+            <p class="timeline-desc">Founded and led the Kabiro Youth Forum, mobilizing hundreds of young people into civic engagement and community clean-up programs.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2014 — 2016</div>
+            <div class="timeline-title">Mjengo Workers Advocate</div>
+            <p class="timeline-desc">Partnered with labor organizations to advocate for construction workers' rights, organizing forums on fair wages and workplace safety in Nairobi's informal construction sector.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2017 — 2019</div>
+            <div class="timeline-title">Women Biashara Support</div>
+            <p class="timeline-desc">Co-founded a women's microenterprise support group connecting over 200 female traders to affordable credit, business training, and market access.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2020 — 2022</div>
+            <div class="timeline-title">Public Participation Leader</div>
+            <p class="timeline-desc">Led public participation forums across Kabiro's sub-locations on county budget allocation, ensuring community voices reached decision-making tables.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2023 — Present</div>
+            <div class="timeline-title">MCA Campaign Launch</div>
+            <p class="timeline-desc">Officially announced candidacy for Kabiro Ward MCA seat in the 2027 general elections, with a comprehensive grassroots manifesto born from years of community engagement.</p>
+          </div>
+        </div>
+      </div>
+      <div class="reveal from-right" style="padding-top:80px;">
+        <div class="section-label">Achievements</div>
+        <h3 class="section-title" style="font-size:1.8rem;">Impact on the <span>Ground</span></h3>
+        <div class="gold-divider"></div>
+        <div style="margin-top:28px;">
+          <div class="achievements-list">
+            <div class="achievement-item">
+              <span class="achievement-icon">🏘️</span>
+              <span class="achievement-text">Organized 15+ community infrastructure projects in collaboration with the Nairobi County Government</span>
+            </div>
+            <div class="achievement-item">
+              <span class="achievement-icon">🎓</span>
+              <span class="achievement-text">Supported 500+ youth with skills training in digital, construction, and hospitality sectors</span>
+            </div>
+            <div class="achievement-item">
+              <span class="achievement-icon">👷</span>
+              <span class="achievement-text">Secured improved pay agreements for over 300 mjengo workers in Kabiro and neighboring areas</span>
+            </div>
+            <div class="achievement-item">
+              <span class="achievement-icon">👩‍💼</span>
+              <span class="achievement-text">Connected 200+ women traders to county business development services and microloans</span>
+            </div>
+            <div class="achievement-item">
+              <span class="achievement-icon">💧</span>
+              <span class="achievement-text">Advocated for clean water access points that now serve 3,000+ residents in Kabiro</span>
+            </div>
+            <div class="achievement-item">
+              <span class="achievement-icon">⚽</span>
+              <span class="achievement-text">Established annual Kabiro Sports Day, uniting over 1,000 youth in organized athletics</span>
+            </div>
+            <div class="achievement-item">
+              <span class="achievement-icon">📢</span>
+              <span class="achievement-text">Represented Kabiro in 10+ county-level public participation sessions on budget and policy</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:40px; padding:28px; background:rgba(201,162,39,0.08); border:1px solid rgba(201,162,39,0.3); border-radius:var(--radius-md);">
+          <h4 style="color:var(--gold); margin-bottom:12px; font-family:var(--font-heading);">Personal Message</h4>
+          <p style="font-style:italic; font-size:0.95rem; color:rgba(255,255,255,0.8); line-height:1.9;">"Kabiro made me who I am. Every broken road I walked, every mjengo worker I spoke to, every mama mboga I listened to — they are the reason I run. My leadership will be measured not by speeches, but by the lives we change together."</p>
+          <p style="margin-top:12px; color:var(--gold); font-weight:700; font-size:0.9rem;">— Maxwell Changilwa</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="quote-section">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <h2 class="quote-text">The people of Kabiro deserve a leader who <em>walks among them,</em> not above them.</h2>
+      <div style="margin-top:36px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <a href="volunteer.html" class="btn btn-primary btn-lg">Join the Movement</a>
+        <a href="donate.html" class="btn btn-outline btn-lg">Support the Campaign</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo"><div class="footer-logo-badge">MC</div><div class="nav-logo-text"><span class="nav-logo-name">Maxwell Changilwa</span><span class="nav-logo-sub">MCA Aspirant · Kabiro Ward</span></div></div>
+          <p class="footer-desc">Fighting for justice, dignity, and development for every resident of Kabiro Ward.</p>
+          <div class="footer-social">
+            <a href="#" class="social-icon">📘</a><a href="#" class="social-icon">🐦</a>
+            <a href="#" class="social-icon">📸</a><a href="https://wa.me/254700000000" class="social-icon">💬</a>
+          </div>
+        </div>
+        <div><h4 class="footer-heading">Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About Maxwell</a><a href="manifesto.html">Manifesto</a><a href="mjengo-workers.html">Mjengo Workers</a><a href="projects.html">Projects</a></div></div>
+        <div><h4 class="footer-heading">Get Involved</h4><div class="footer-links"><a href="volunteer.html">Volunteer</a><a href="donate.html">Donate</a><a href="gallery.html">Gallery</a><a href="news.html">News</a><a href="contact.html">Contact</a></div></div>
+        <div>
+          <h4 class="footer-heading">Contact</h4>
+          <div class="footer-contact-item"><span class="footer-contact-icon">📍</span><span>Kabiro Ward, Westlands, Nairobi</span></div>
+          <div class="footer-contact-item"><span class="footer-contact-icon">📞</span><span>+254 700 000 000</span></div>
+          <div class="footer-contact-item"><span class="footer-contact-icon">✉️</span><span>info@changilwa2027.ke</span></div>
+          <form class="newsletter-form" id="newsletterForm" style="margin-top:16px;">
+            <input class="newsletter-input" type="email" placeholder="Your email" required />
+            <button class="newsletter-btn" type="submit">Join</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container"><div class="footer-bottom"><p class="footer-bottom-text">© 2025 Maxwell Changilwa Campaign. All rights reserved.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="contact.html">Contact</a></div></div></div>
+</footer>
+
+<a href="https://wa.me/254700000000" class="whatsapp-float">💬</a>
+<button class="scroll-top" id="scrollTop">↑</button>
+<script src="js/main.js"></script>
+</body>
+</html>
